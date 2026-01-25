@@ -11,16 +11,16 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log({ name, email, password })
+    //create user
     createUser(email, password)
       .then(userCredential => {
         // Signed up
         const user = userCredential.user;
-        console.log(user);
-        setUser(user)
+        setUser(user);
       })
       .catch(error => {
         const errorMessage = error.message;
-        alert(errorMessage)
+        alert(errorMessage);
       });
   }
   return (
