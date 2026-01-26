@@ -12,11 +12,13 @@ const Login = () => {
       .then(userCredential => {
         // Signed in
         const user = userCredential.user;
-        console.log(user)
+        console.log(user);
+        
       })
       .catch(error => {
         alert(error);
       });
+    
   }
   return (
     <div className="flex justify-center items-center">
