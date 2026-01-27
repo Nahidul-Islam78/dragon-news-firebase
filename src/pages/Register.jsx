@@ -1,10 +1,11 @@
 import React, { use, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../provider/AuthProvider';
 
 
 const Register = () => {
-  const { createUser, setUser } = use(AuthContext)
+  const navigate=useNavigate()
+  const { createUser, setUser, upDateUserData } = use(AuthContext);
   const [error, setError] = useState('');
   const [errorPassword, setErrorPassword] = useState('')
   const handelRegister = (e) => {
@@ -15,6 +16,8 @@ const Register = () => {
       setError('name At last 5 character');
       return
     }
+    const photoUrl = e.target.photo.value;
+
     const email = e.target.email.value;
     const password = e.target.password.value;
     setError('');
@@ -28,7 +31,14 @@ const Register = () => {
       .then(userCredential => {
         // Signed up
         const user = userCredential.user;
-        setUser(user);
+        upDateUserData({ displayName: name, photoURL: photoUrl }).then(() => {
+          setUser({ ...user, displayName: name, photoURL: photoUrl });
+          navigate('/')
+        }).catch ((error) => {
+          console.log(error);
+          setUser(user);
+        })
+       
       })
       .catch(error => {
         const errorMessage = error.message;
@@ -57,6 +67,7 @@ const Register = () => {
             <p className='text-red-500'>{error}</p>
             <label className="label font-bold">Photo URL</label>
             <input
+              name='photo'
               type="text"
               className="input"
               placeholder="Photo URL"
