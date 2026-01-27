@@ -5,6 +5,7 @@ import Loading from '../pages/Loading';
 
 const PrivetRoute = ({ children }) => {
   const { user, loading } = use(AuthContext);
+  
   const location = useLocation();
   console.log(location);
   if (loading) {

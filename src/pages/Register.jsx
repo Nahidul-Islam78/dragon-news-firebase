@@ -1,15 +1,27 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { Link } from 'react-router';
 import { AuthContext } from '../provider/AuthProvider';
 
 
 const Register = () => {
-  const {createUser,setUser}=use(AuthContext)
+  const { createUser, setUser } = use(AuthContext)
+  const [error, setError] = useState('');
+  const [errorPassword, setErrorPassword] = useState('')
   const handelRegister = (e) => {
     e.preventDefault()
     const name = e.target.name.value;
+    setError('');
+    if (name.length<5) {
+      setError('name At last 5 character');
+      return
+    }
     const email = e.target.email.value;
     const password = e.target.password.value;
+    setError('');
+    if (password.length < 8) {
+      setErrorPassword('password At last 8 character');
+      return;
+    }
     console.log({ name, email, password })
     //create user
     createUser(email, password)
@@ -42,6 +54,7 @@ const Register = () => {
               placeholder="Your Name"
               required
             />
+            <p className='text-red-500'>{error}</p>
             <label className="label font-bold">Photo URL</label>
             <input
               type="text"
@@ -65,6 +78,7 @@ const Register = () => {
               placeholder="Password"
               required
             />
+            <p className='text-red-500'>{errorPassword}</p>
             <label className="label">
               <input type="checkbox" className="checkbox" />
               Accept Term & Conditions
