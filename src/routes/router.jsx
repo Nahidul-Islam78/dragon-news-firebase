@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router";
-import HomeLayout from "../layouts/HomeLayout";
-import CategoryNews from "../pages/CategoryNews";
-import Home from "../pages/Home";
-import AuthLayout from "../layouts/AuthLayout";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import NewsDetails from "../pages/NewsDetails";
-import PrivetRoute from "../provider/PrivetRoute";
+import HomeLayout from '../layouts/HomeLayout';
+import CategoryNews from '../pages/CategoryNews';
+import Home from '../pages/Home';
+import AuthLayout from '../layouts/AuthLayout';
+import Login from '../pages/Login';
+import Register from '../pages/Register';
+import NewsDetails from '../pages/NewsDetails';
+import PrivetRoute from '../provider/PrivetRoute';
+import Loading from '../pages/Loading';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
         path: '/category/:id',
         element: <CategoryNews></CategoryNews>,
         loader: () => fetch('/news.json'),
+        HydrateFallback: Loading,
       },
     ],
   },
@@ -46,6 +48,7 @@ const router = createBrowserRouter([
       </PrivetRoute>
     ),
     loader: () => fetch('/news.json'),
+    HydrateFallback: Loading,
   },
   {
     path: '/*',

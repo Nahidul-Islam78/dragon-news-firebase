@@ -8,7 +8,7 @@ const Login = () => {
 
 
   const location = useLocation();
-  console.log(location);
+  //console.log(location);
 
   const navigate = useNavigate()
   
@@ -20,7 +20,7 @@ const Login = () => {
       .then(userCredential => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
+        //console.log(user);
         navigate(`${location.state?location.state:'/'}`)
       })
       .catch(error => {

@@ -25,7 +25,7 @@ const Register = () => {
       setErrorPassword('password At last 8 character');
       return;
     }
-    console.log({ name, email, password })
+    //console.log({ name, email, password })
     //create user
     createUser(email, password)
       .then(userCredential => {

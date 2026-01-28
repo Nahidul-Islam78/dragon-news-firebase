@@ -8,7 +8,7 @@ import { useLoaderData, useParams } from 'react-router';
 const NewsDetails = () => {
   const data = useLoaderData()
   const { id } = useParams()
-  console.log(data, id);
+  //console.log(data, id);
   const[news,setNews]=useState({})
   useEffect(() => {
     const newsDetails = data.find(singleNews => singleNews.id == id)
